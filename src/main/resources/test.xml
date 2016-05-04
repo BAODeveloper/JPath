@@ -1,0 +1,11 @@
+<root name=aa>
+	<bookstore name="shudian1" id=1>
+		<book>hello</book>
+	</bookstore>
+	<bookstore>
+		<book>world</book>
+	</bookstore>
+</root>
+<may name="bb">
+	<this />
+</may>
