@@ -3,12 +3,13 @@ package node;
 import java.util.ArrayList;
 import java.util.List;
 
+import node.criteria.JSONArrayCriteria;
+
 import org.slf4j.Logger;
 
 import utils.StringUtils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 
 public class JSONArrayNode extends JNode {
 
@@ -29,12 +30,15 @@ public class JSONArrayNode extends JNode {
 			filtered.add(raw);
 		} else {
 			try {
-				JSONObject jsonObject = JSON.parseObject(raw);
-				String s = jsonObject.getString(key);
-				if (s != null) {
-					filtered.add(s);
-					selected.add(s);
-					logger.warn("JSONArrayNode no such key");
+				JSONArray array = JSONArray.parseArray(raw);
+				JSONArrayCriteria criteria = new JSONArrayCriteria(path);
+
+				for (int i = 0; i < array.size(); i++) {
+					String str = array.getString(i);
+					selected.add(str);
+					if (criteria.isValid(str)) {
+						filtered.add(str);
+					}
 				}
 			} catch (Exception e) {
 				logger.error("JSONArrayNode parse failed" + e.getMessage(), e);

@@ -32,7 +32,8 @@ public class JSONNode extends JNode {
 				if (s != null) {
 					selected.add(s);
 					filtered.add(s);
-					logger.warn("JSONNode no such key");
+				} else {
+					logger.warn("JSONNode no such key: " + key);
 				}
 			} catch (Exception e) {
 				logger.error("JSONNode parse failed" + e.getMessage(), e);
