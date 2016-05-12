@@ -46,8 +46,10 @@ public class XMLNode extends JNode {
 						filtered.add(node.toString());
 					}
 				}
+			} else if (key.startsWith("text()")) {
+				selected.add(doc.text());
+				filtered.add(doc.text());
 			} else {
-
 				Elements elements = doc.select(key);
 				for (Element element : elements) {
 					selected.add(element.toString());
